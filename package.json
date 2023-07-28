@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    
+
     "nc": "f() { ng g c --flat ui/comp/\"$1\"; }; f",
     "nv": "f() { ng g c --flat ui/view/\"$1\"-view; }; f",
 
@@ -17,7 +17,7 @@
     "nm": "f() { ng g i data/model/\"$1\"-model; }; f",
 
     "nt": "f() { ng g i data/type/\"$1\"; }; f"
-    
+
   },
   "private": true,
   "dependencies": {

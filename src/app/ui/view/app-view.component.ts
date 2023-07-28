@@ -34,8 +34,9 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
         /* border-right: 1px solid black; */
         box-sizing: border-box;
       }
-      main > section:nth-child(1) { min-width: 150px;}
-      main > section:nth-child(2) { min-width: 500px; z-index: -1; }
+      main > section:nth-child(1) { min-width: 150px; z-index: 1; }
+      main > section:nth-child(3) { min-width: 150px; z-index: 1; }
+      main > section:nth-child(2) { min-width: 500px; }
     `
   ]
 })
@@ -46,9 +47,9 @@ export class AppViewComponent {
     { id: 1, name: 'My Wallet', total: 45380 },
     { id: 2, name: 'Family Wallet', total: 32500,
       transactions: [
-        { id: 1, name: 'Salary', amount: 20000 },
-        { id: 2, name: 'Gift from grandma', amount: 4000 },
-        { id: 3, name: 'Phone bill', amount: -1500 },
+        { id: 1, name: 'Salary', amount: 20000, date: new Date() },
+        { id: 2, name: 'Gift from grandma', amount: 4000, date: new Date() },
+        { id: 3, name: 'Phone bill', amount: -1500, date: new Date() },
       ]
     },
   ]

@@ -13,7 +13,9 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
       </span>
       <nav *ngIf="wallet && wallet.transactions">
         <a *ngFor="let t of wallet.transactions" href="#">
-          {{t.name}}
+          <span class="amount" [ngClass]="{ 'neg': t.amount < 0, 'pos': t.amount > 0 }">{{t.amount}}</span> |
+          <span class="title">{{t.name}}</span>
+          <div class="date">{{t.date.toDateString()}}</div>
         </a>
       </nav>
     </app-section>
@@ -45,6 +47,21 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
         color: unset;
         background: #fff;
         text-decoration: none;
+
+        /* border: 1px solid transparent; */
+      }
+      nav > a:hover {
+        background: #eee;
+        outline: 1px solid black;
+      }
+      nav > a > .amount.pos {
+        color: green;
+      }
+      nav > a > .amount.neg {
+        color: red;
+      }
+      nav > a > .date {
+        font-size: 0.8em;
       }
     `
   ]

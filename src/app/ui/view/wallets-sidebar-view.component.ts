@@ -26,7 +26,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
         /* height: 30px; */
 
         border-radius: 4px;
-        border: 1px solid transparent;
+        /* border: 2px solid transparent; */
 
         margin-bottom: 8px;
         padding: 4px 8px;
@@ -36,13 +36,12 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
         text-decoration: none;
       }
       nav > a:hover {
-        background: #f5f5f5;
-        border: 1px solid black;
+        background: #eee;
+        outline: 1px solid black;
       }
       nav > a.active {
         background: #f5f5f5;
-        border: 2px solid black;
-        font-weight: bold;
+        outline: 2px solid black;
       }
 
     `
