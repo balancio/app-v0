@@ -24,6 +24,7 @@ import { Component, Input } from '@angular/core';
       section {
         height: 100%;
         background: #e0e0e0;
+        overflow: hide;
       }
       /* Header */
       header {
@@ -35,7 +36,7 @@ import { Component, Input } from '@angular/core';
         padding: 0 16px;
 
         background: #d1d1d1;
-        
+
         border-bottom: 1px solid black;
       }
       header > h1 {
@@ -43,7 +44,8 @@ import { Component, Input } from '@angular/core';
       }
       /* Main */
       main {
-        
+        height: 85%; /* TODO: This is hard-coded! */
+        overflow: auto;
       }
     `
   ]
