@@ -2,4 +2,15 @@ body {
   margin: 0;
   z-index: -1;
   overflow: hidden;
+  background: #252627;
+  color: #ccc;
+  /* color: #d4d4d4; */
+}
+
+.c-good {
+  color: #229952;
+}
+
+.c-bad {
+  color: #b92c44;
 }

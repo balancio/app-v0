@@ -17,10 +17,12 @@ import { WalletService } from 'src/app/srv/wallet.service';
         </app-wallets-sidebar-view>
       </section>
       <section>
-        <app-wallet-view [wallet]="selectedWallet"></app-wallet-view>
+        <app-wallet-view [wallet]="selectedWallet" (newTran)="openNewTranPanel()"></app-wallet-view>
       </section>
       <section>
-        <app-section [title]="'Info'"></app-section>
+        <app-section *ngIf="infoPanel == null" [title]="''"></app-section>
+        <app-section *ngIf="infoPanel == 'AddTran'" [title]="'Create Transaction'"></app-section>
+        <app-section *ngIf="infoPanel == 'AddWallet'" [title]="'Create Wallet'"></app-section>
       </section>
     </main>
   `,
@@ -44,8 +46,9 @@ import { WalletService } from 'src/app/srv/wallet.service';
 })
 export class AppViewComponent {
 
-  // TODO: ! Hardcoded values
   wallets: WalletModel[] = []
+
+  infoPanel: null | 'AddTran' | 'AddWallet' = null
 
   constructor(
     private walletSrv: WalletService
@@ -60,6 +63,10 @@ export class AppViewComponent {
       (trans) => this.cbSuccessGetTrans(trans, val),
       () => this.selectedWallet = null
     )
+  }
+
+  openNewTranPanel() {
+    this.infoPanel = 'AddTran'
   }
 
   // Callbacks

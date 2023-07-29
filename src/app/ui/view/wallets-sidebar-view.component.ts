@@ -6,12 +6,11 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
   template: `
     <app-section [title]="'Wallets'">
       <nav>
-        <a *ngFor="let w of wallets" href="#"
-          [ngClass]="{ 'active': selected == w }"
-          (click)="walletChanged.emit(w)"
-        >
-          {{w.name}}
-        </a>
+        <div *ngFor="let w of wallets">
+          <app-card [active]="selected == w" (interact)="walletChanged.emit(w)">
+            {{w.name}}
+          </app-card>
+        </div>
       </nav>
     </app-section>
   `,
@@ -22,28 +21,9 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
         flex-direction: column;
         padding: 8px;
       }
-      nav > a {
-        /* height: 30px; */
-
-        border-radius: 4px;
-        /* border: 2px solid transparent; */
-
+      nav > div {
         margin-bottom: 8px;
-        padding: 4px 8px;
-
-        color: unset;
-        background: #fff;
-        text-decoration: none;
       }
-      nav > a:hover {
-        background: #eee;
-        outline: 1px solid black;
-      }
-      nav > a.active {
-        background: #f5f5f5;
-        outline: 2px solid black;
-      }
-
     `
   ]
 })

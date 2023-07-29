@@ -10,6 +10,7 @@ import { WalletViewComponent } from './ui/view/wallet-view.component';
 import { LoginViewComponent } from './ui/view/login-view.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CardComponent } from './ui/comp/card.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     SectionComponent,
     WalletsSidebarViewComponent,
     WalletViewComponent,
-    LoginViewComponent
+    LoginViewComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

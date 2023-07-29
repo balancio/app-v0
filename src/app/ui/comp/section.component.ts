@@ -23,7 +23,8 @@ import { Component, Input } from '@angular/core';
       }
       section {
         height: 100%;
-        background: #e0e0e0;
+        background: #252627;
+        /* background: #333435; */
         overflow: hide;
       }
       /* Header */
@@ -35,7 +36,7 @@ import { Component, Input } from '@angular/core';
         height: 50px;
         padding: 0 16px;
 
-        background: #d1d1d1;
+        background: #1f2021;
 
         border-bottom: 1px solid black;
       }
