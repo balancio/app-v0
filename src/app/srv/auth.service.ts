@@ -3,6 +3,7 @@ import { UserApiService } from '../api/user-api.service';
 import tokenUtil from '../util/token';
 import { ApiHelperService } from './api-helper.service';
 import { HttpStatusCode } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AuthService {
 
   constructor(
     private userApi: UserApiService,
+    private router: Router
   ) { }
 
   login(user: string, pass: string, onSuccess: Function = () => {}, onError: Function = () => {}) {
@@ -34,5 +36,17 @@ export class AuthService {
 
   getToken(): string | null {
     return tokenUtil.loadToken()
+  }
+
+  getTokenPayload(navIfNull = false) {
+    const token = tokenUtil.loadToken()
+
+    if (token == null) {
+      if (navIfNull)
+        this.router.navigate(['login'])
+      return null
+    }
+
+    return JSON.parse(atob(token.split('.')[1]))
   }
 }

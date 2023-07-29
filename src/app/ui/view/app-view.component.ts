@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WalletModel } from 'src/app/data/model/wallet-model';
+import { WalletService } from 'src/app/srv/wallet.service';
 
 @Component({
   selector: 'app-app-view',
@@ -53,6 +54,12 @@ export class AppViewComponent {
       ]
     },
   ]
+
+  constructor(
+    private walletSrv: WalletService
+  ) {
+    walletSrv.getMyWallets()
+  }
 
   selectedWallet: WalletModel | null = this.wallets[1]
 
