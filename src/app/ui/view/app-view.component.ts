@@ -44,26 +44,24 @@ import { WalletService } from 'src/app/srv/wallet.service';
 export class AppViewComponent {
 
   // TODO: ! Hardcoded values
-  wallets: WalletModel[] = [
-    { id: 1, name: 'My Wallet', total: 45380 },
-    { id: 2, name: 'Family Wallet', total: 32500,
-      transactions: [
-        { id: 1, name: 'Salary', amount: 20000, date: new Date() },
-        { id: 2, name: 'Gift from grandma', amount: 4000, date: new Date() },
-        { id: 3, name: 'Phone bill', amount: -1500, date: new Date() },
-      ]
-    },
-  ]
+  wallets: WalletModel[] = []
 
   constructor(
     private walletSrv: WalletService
   ) {
-    walletSrv.getMyWallets()
+    walletSrv.getMyWallets(this.cbSuccessGetMyWallets.bind(this))
   }
 
   selectedWallet: WalletModel | null = this.wallets[1]
 
   getWalletData(val: WalletModel) {
     this.selectedWallet = val
+  }
+
+  // Callbacks
+
+  cbSuccessGetMyWallets(wallets: WalletModel[]) {
+    console.log(wallets)
+    this.wallets = wallets
   }
 }
