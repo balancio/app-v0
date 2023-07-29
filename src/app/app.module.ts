@@ -11,6 +11,7 @@ import { LoginViewComponent } from './ui/view/login-view.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CardComponent } from './ui/comp/card.component';
+import { AddTransactionViewComponent } from './ui/view/add-transaction-view.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CardComponent } from './ui/comp/card.component';
     WalletsSidebarViewComponent,
     WalletViewComponent,
     LoginViewComponent,
-    CardComponent
+    CardComponent,
+    AddTransactionViewComponent
   ],
   imports: [
     BrowserModule,

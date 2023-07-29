@@ -14,3 +14,22 @@ body {
 .c-bad {
   color: #b92c44;
 }
+
+input {
+  background: #333435;
+  border: 1px solid #181819;
+  border-radius: 4px;
+  color: unset;
+  padding: 4px 8px;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid;
+}
+
+.test-class {
+  flex-grow: 1;
+}

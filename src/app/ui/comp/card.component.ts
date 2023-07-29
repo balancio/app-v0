@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-card',
   template: `
-    <a class="card" (click)="onInteract()" href="#" [ngClass]="{ active }">
+    <a class="card" (click)="onInteract()" [ngClass]="{ active }">
       <ng-content></ng-content>
     </a>
   `,

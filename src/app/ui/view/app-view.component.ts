@@ -20,8 +20,8 @@ import { WalletService } from 'src/app/srv/wallet.service';
         <app-wallet-view [wallet]="selectedWallet" (newTran)="openNewTranPanel()"></app-wallet-view>
       </section>
       <section>
-        <app-section *ngIf="infoPanel == null" [title]="''"></app-section>
-        <app-section *ngIf="infoPanel == 'AddTran'" [title]="'Create Transaction'"></app-section>
+        <!-- <app-section *ngIf="infoPanel == null" [title]="''"></app-section> -->
+        <app-add-transaction-view *ngIf="infoPanel == null"></app-add-transaction-view>
         <app-section *ngIf="infoPanel == 'AddWallet'" [title]="'Create Wallet'"></app-section>
       </section>
     </main>
