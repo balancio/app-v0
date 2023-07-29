@@ -7,6 +7,9 @@ import { AppViewComponent } from './ui/view/app-view.component';
 import { SectionComponent } from './ui/comp/section.component';
 import { WalletsSidebarViewComponent } from './ui/view/wallets-sidebar-view.component';
 import { WalletViewComponent } from './ui/view/wallet-view.component';
+import { LoginViewComponent } from './ui/view/login-view.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { WalletViewComponent } from './ui/view/wallet-view.component';
     AppViewComponent,
     SectionComponent,
     WalletsSidebarViewComponent,
-    WalletViewComponent
+    WalletViewComponent,
+    LoginViewComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
