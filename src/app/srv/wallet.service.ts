@@ -3,8 +3,9 @@ import { WalletApiService } from '../api/wallet-api.service';
 import { UserApiService } from '../api/user-api.service';
 import { AuthService } from './auth.service';
 import { HttpStatusCode } from '@angular/common/http';
-import { WalletModel, fromBody } from '../data/model/wallet-model';
-import { CbOnError, CbWallets } from '../data/type/callbacks';
+import { fromBody as walletFromBody } from '../data/model/wallet-model';
+import { fromBody as tranFromBody } from '../data/model/transaction-model';
+import { CbOnError, CbTransactions, CbWallets } from '../data/type/callbacks';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { CbOnError, CbWallets } from '../data/type/callbacks';
 export class WalletService {
 
   constructor(
-    // private walletApi: WalletApiService,
+    private walletApi: WalletApiService,
     private userApi: UserApiService,
     private authSrv: AuthService,
   ) { }
@@ -28,15 +29,18 @@ export class WalletService {
     const user = this.authSrv.getTokenPayload().username
     this.userApi.getUserWallets(user).subscribe((res) => {
       if (res.status == HttpStatusCode.Ok) {
-        const data = (res.body as Array<any>).map(fromBody)
+        const data = (res.body as Array<any>).map(walletFromBody)
         onSuccess(data)
       }
     })
   }
 
-  // getWalletTrans(wid: string, onSuccess: Function = () => {}, onError: Function = () => {}) {
-  //   this.walletApi.getWalletTrans(wid).subscribe((res) => {
-  //     console.log(res.body)
-  //   })
-  // }
+  getWalletTrans(wid: string, onSuccess: CbTransactions, onError: CbOnError = () => {}) {
+    this.walletApi.getWalletTrans(wid).subscribe((res) => {
+      if (res.status == HttpStatusCode.Ok) {
+        const data = (res.body as Array<any>).map(tranFromBody)
+        onSuccess(data)
+      }
+    })
+  }
 }

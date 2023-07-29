@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TransactionModel } from 'src/app/data/model/transaction-model';
 import { WalletModel } from 'src/app/data/model/wallet-model';
 import { WalletService } from 'src/app/srv/wallet.service';
 
@@ -55,7 +56,10 @@ export class AppViewComponent {
   selectedWallet: WalletModel | null = this.wallets[1]
 
   getWalletData(val: WalletModel) {
-    this.selectedWallet = val
+    this.walletSrv.getWalletTrans(val.id,
+      (trans) => this.cbSuccessGetTrans(trans, val),
+      () => this.selectedWallet = null
+    )
   }
 
   // Callbacks
@@ -63,5 +67,13 @@ export class AppViewComponent {
   cbSuccessGetMyWallets(wallets: WalletModel[]) {
     console.log(wallets)
     this.wallets = wallets
+  }
+
+  cbSuccessGetTrans(trans: TransactionModel[], selected: WalletModel) {
+    console.log(trans)
+    if (this.selectedWallet)
+      this.selectedWallet.transactions = undefined
+    selected.transactions = trans
+    this.selectedWallet = selected
   }
 }

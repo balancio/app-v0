@@ -14,7 +14,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
       <nav *ngIf="wallet && wallet.transactions">
         <a *ngFor="let t of wallet.transactions" href="#">
           <span class="amount" [ngClass]="{ 'neg': t.amount < 0, 'pos': t.amount > 0 }">{{t.amount}}</span> |
-          <span class="title">{{t.name}}</span>
+          <span class="title">{{t.title}}</span>
           <div class="date">{{t.date.toDateString()}}</div>
         </a>
       </nav>
