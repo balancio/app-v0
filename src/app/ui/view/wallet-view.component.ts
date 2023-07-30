@@ -7,7 +7,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
   template: `
     <app-section [title]="wallet?.name ?? null" [outline]="false" [vh100]="true">
       <span *ngIf="wallet" class="info" header>
-        <span [ngClass]="{ 'c-bad': wallet.total < 0, 'c-good': wallet.total > 0 }">
+        <span [ngClass]="{ 'c-bad': wallet.total < 0, 'c-good': wallet.total > 0, 'c-warn': wallet.total == 0 }">
           {{wallet.total}}
         </span> {{wallet.currency}}
       </span>

@@ -113,6 +113,8 @@ export class AppViewComponent {
   cbSuccessNewTran() {
     this.infoPanel = null
     this.infoPanel = 'AddTran'
+    if (this.selectedWallet)
+      this.getWalletData(this.selectedWallet)
   }
 
   cbSuccessNewWallet() {

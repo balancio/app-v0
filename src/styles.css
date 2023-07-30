@@ -15,6 +15,10 @@ body {
   color: #b92c44;
 }
 
+.c-warn {
+  color: #cebe35;
+}
+
 /* Input */
 
 input {
