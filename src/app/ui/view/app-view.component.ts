@@ -10,6 +10,7 @@ import { WalletService } from 'src/app/srv/wallet.service';
       <section>
         <app-wallets-sidebar-view
           (walletChanged)="getWalletData($event)"
+          (newWallet)="openNewWalletPanel()"
           [wallets]="wallets"
           [selected]="selectedWallet"
         >
@@ -22,7 +23,7 @@ import { WalletService } from 'src/app/srv/wallet.service';
       <section>
         <app-section *ngIf="infoPanel == null" [title]="''" [vh100]="true"></app-section>
         <app-add-transaction-view *ngIf="infoPanel == 'AddTran'" (add)="addNewTransaction($event)"></app-add-transaction-view>
-        <app-section *ngIf="infoPanel == 'AddWallet'" [title]="'Create Wallet'" [vh100]="true"></app-section>
+        <app-add-wallet-view *ngIf="infoPanel == 'AddWallet'" (add)="addNewWallet($event)"></app-add-wallet-view>
       </section>
     </main>
   `,
@@ -69,11 +70,20 @@ export class AppViewComponent {
     this.infoPanel = 'AddTran'
   }
 
+  openNewWalletPanel() {
+    this.infoPanel = 'AddWallet'
+  }
+
   addNewTransaction(tran: TransactionModel) {
     if (this.selectedWallet == null)
       return
 
     this.walletSrv.createWalletTran(this.selectedWallet.id, tran, this.cbSuccessNewTran.bind(this))
+  }
+
+  addNewWallet(wallet: WalletModel) {
+    console.log('New Wallet!')
+    // this.walletSrv.createWalletTran(this.selectedWallet.id, tran, this.cbSuccessNewTran.bind(this))
   }
 
   // Callbacks

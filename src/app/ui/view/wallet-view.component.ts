@@ -12,7 +12,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
         </span> RSD
       </span>
       <span *ngIf="wallet" class="info" header>
-        <app-card (interact)="newTranClick()">+</app-card>
+        <app-card (interact)="newTranClick()" [active]="selNewTran">New Transaction</app-card>
       </span>
       <nav *ngIf="wallet && wallet.transactions">
         <div *ngFor="let t of wallet.transactions">
@@ -28,9 +28,9 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
   styles: [
     `
       span.info {
-        font-size: 1.2em;
+        /* font-size: 1.2em; */
         margin-left: 10px;
-        font-weight: bold;
+        /* font-weight: bold; */
         border-left: 1px solid black;
         padding-left: 10px;
       }
@@ -55,12 +55,16 @@ export class WalletViewComponent {
   @Input() wallet: WalletModel | null = null
 
   selTran: null | TransactionModel = null
+  selNewTran = false
 
   onTranClick(tran: TransactionModel) {
+    this.selNewTran = false
     this.selTran = tran
   }
 
   newTranClick() {
+    this.selNewTran = true
+    this.selTran = null
     this.openNewTranPanel.emit()
   }
 }
