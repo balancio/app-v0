@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import styleUtil from 'src/app/util/style';
 
 @Component({
   selector: 'app-settings-view',
@@ -7,7 +8,17 @@ import { Component } from '@angular/core';
       <h1 header>App Settings</h1>
       <main>
 
-
+        <div class="gr-1">
+          <div>
+            <div>Accent Color</div>
+            <button class="color" *ngFor="let color of colors"
+              (click)="setColor(color.value)"
+              [style.background]="color.value"
+              [style.outlineColor]="getAccent()">
+                {{color.name}}
+            </button>
+          </div>
+        </div>
 
       </main>
     </app-section>
@@ -17,16 +28,6 @@ import { Component } from '@angular/core';
     main {
       padding: 20px;
       width: min-content;
-    }
-    label {
-      display: inline-block;
-      margin-bottom: 8px;
-    }
-    label > div {
-      padding-left: 4px;
-    }
-    label > input {
-      width: 100%;
     }
     main > div {
       display: grid;
@@ -39,14 +40,39 @@ import { Component } from '@angular/core';
       grid-template-columns: 200px 200px;
     }
 
-    /* button {
-      display: block;
-      margin: auto;
-      margin-top: 20px;
-    } */
+    button.color {
+      color: #1f2021;
+      margin: 10px 0 0 10px;
+      border: 1px solid transparent;
+      font-weight: bold;
+    }
+    button.color:hover {
+      outline: 4px solid;
+      border: 1px solid #1f2021;
+    }
+    button.color:active {
+      outline: 2px solid;
+      border: 1px solid #1f2021;
+    }
   `
   ]
 })
 export class SettingsViewComponent {
+
+  colors: {name: string, value: string}[] = [
+    {name: 'white', value: '#ccc'},
+    {name: 'blue', value: '#ccceee'},
+    {name: 'yellow', value: '#eeeccc'},
+    {name: 'green', value: 'lime'},
+  ]
+
+  getAccent() {
+    return styleUtil.accentColor.get()
+  }
+
+  setColor(color: string) {
+    console.log(color)
+    styleUtil.accentColor.change(color)
+  }
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import styleUtil from './util/style';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'balancio';
+
+  constructor() {
+    styleUtil.accentColor.refresh()
+  }
 }
