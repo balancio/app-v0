@@ -17,7 +17,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
       </div>
       <nav>
         <div *ngFor="let w of wallets">
-          <app-card [active]="selected == w" (interact)="walletChanged.emit(w)">
+          <app-card [active]="selected != null && selected.id == w.id" (interact)="walletChanged.emit(w)">
             {{w.name}}
           </app-card>
         </div>

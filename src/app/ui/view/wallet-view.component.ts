@@ -16,7 +16,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
       </span>
       <nav *ngIf="wallet && wallet.transactions">
         <div *ngFor="let t of wallet.transactions">
-          <app-card (interact)="onTranClick(t)" [active]="t == selTran">
+          <app-card (interact)="onTranClick(t)" [active]="selTran != null && t.id == selTran.id">
             <span class="amount" [ngClass]="{ 'c-bad': t.amount < 0, 'c-good': t.amount > 0 }">{{t.amount}}</span> |
             <span class="title">{{t.title}}</span>
             <div class="date">{{t.date.toDateString()}}</div>
