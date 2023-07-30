@@ -54,10 +54,12 @@ export class AppViewComponent {
   constructor(
     private walletSrv: WalletService
   ) {
-    walletSrv.getMyWallets(this.cbSuccessGetMyWallets.bind(this))
+    this.getMyWallets()
   }
 
   selectedWallet: WalletModel | null = this.wallets[1]
+
+  // ==== API - Read ====
 
   getWalletData(val: WalletModel) {
     this.walletSrv.getWalletTrans(val.id,
@@ -66,13 +68,11 @@ export class AppViewComponent {
     )
   }
 
-  openNewTranPanel() {
-    this.infoPanel = 'AddTran'
+  getMyWallets() {
+    this.walletSrv.getMyWallets(this.cbSuccessGetMyWallets.bind(this))
   }
 
-  openNewWalletPanel() {
-    this.infoPanel = 'AddWallet'
-  }
+  // ==== API - Write ====
 
   addNewTransaction(tran: TransactionModel) {
     if (this.selectedWallet == null)
@@ -82,11 +82,20 @@ export class AppViewComponent {
   }
 
   addNewWallet(wallet: WalletModel) {
-    console.log('New Wallet!')
-    // this.walletSrv.createWalletTran(this.selectedWallet.id, tran, this.cbSuccessNewTran.bind(this))
+    this.walletSrv.createWallet(wallet, this.cbSuccessNewWallet.bind(this))
   }
 
-  // Callbacks
+  // ==== UI Change ====
+
+  openNewTranPanel() {
+    this.infoPanel = 'AddTran'
+  }
+
+  openNewWalletPanel() {
+    this.infoPanel = 'AddWallet'
+  }
+
+  // ==== Callbacks ====
 
   cbSuccessGetMyWallets(wallets: WalletModel[]) {
     console.log(wallets)
@@ -104,5 +113,11 @@ export class AppViewComponent {
   cbSuccessNewTran() {
     this.infoPanel = null
     this.infoPanel = 'AddTran'
+  }
+
+  cbSuccessNewWallet() {
+    this.infoPanel = null
+    this.infoPanel = 'AddTran'
+    this.getMyWallets()
   }
 }

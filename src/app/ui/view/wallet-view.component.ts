@@ -9,7 +9,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
       <span *ngIf="wallet" class="info" header>
         <span [ngClass]="{ 'c-bad': wallet.total < 0, 'c-good': wallet.total > 0 }">
           {{wallet.total}}
-        </span> RSD
+        </span> {{wallet.currency}}
       </span>
       <span *ngIf="wallet" class="info" header>
         <app-card (interact)="newTranClick()" [active]="selNewTran">New Transaction</app-card>

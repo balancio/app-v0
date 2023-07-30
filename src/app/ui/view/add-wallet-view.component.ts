@@ -8,10 +8,15 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
       <h1 header>Create new Wallet</h1>
       <main>
 
-        <div class="gr-1">
+        <div class="gr-2">
           <label>
-            <div>Title</div>
+            <div>Name</div>
             <input type="text" [(ngModel)]="name">
+          </label>
+
+          <label>
+            <div>Currency</div>
+            <input type="text" [(ngModel)]="currency">
           </label>
         </div>
 
@@ -43,6 +48,9 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
     main > div.gr-1 {
       grid-template-columns: 408px;
     }
+    main > div.gr-2 {
+      grid-template-columns: 200px 200px;
+    }
 
     button {
       display: block;
@@ -57,6 +65,7 @@ export class AddWalletViewComponent {
   @Output('add') addEve = new EventEmitter()
 
   name: string = ''
+  currency: string = ''
 
   add() {
     // console.log(this.title, this.date, this.amount)
@@ -67,7 +76,8 @@ export class AddWalletViewComponent {
     const wallet: WalletModel = {
       id: '',
       name: this.name,
-      total: 0
+      total: 0,
+      currency: this.currency
     }
 
     this.addEve.emit(wallet)

@@ -30,4 +30,11 @@ export class WalletApiService {
       headers: this.httpHelp.fillHeaders()
     })
   }
+
+  createWallet(wallet: any) {
+    return this.http.post(this.url(), wallet, {
+      observe: 'response',
+      headers: this.httpHelp.fillHeaders()
+    })
+  }
 }

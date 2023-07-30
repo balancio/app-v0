@@ -3,7 +3,7 @@ import { WalletApiService } from '../api/wallet-api.service';
 import { UserApiService } from '../api/user-api.service';
 import { AuthService } from './auth.service';
 import { HttpStatusCode } from '@angular/common/http';
-import { fromBody as walletFromBody } from '../data/model/wallet-model';
+import { WalletModel, fromBody as walletFromBody } from '../data/model/wallet-model';
 import { TransactionModel, fromBody as tranFromBody } from '../data/model/transaction-model';
 import { CbEmpty, CbTransactions, CbWallets } from '../data/type/callbacks';
 
@@ -52,6 +52,19 @@ export class WalletService {
     }
     console.log(newTran)
     this.walletApi.createWalletTran(wid, newTran).subscribe((res) => {
+      if (res.status == HttpStatusCode.Created) {
+        onSuccess()
+      }
+    })
+  }
+
+  createWallet(wallet: WalletModel, onSuccess: CbEmpty, onError: CbEmpty = () => {}) {
+    const newWallet = {
+      name: wallet.name,
+      currency: wallet.currency
+    }
+    console.log(newWallet)
+    this.walletApi.createWallet(newWallet).subscribe((res) => {
       if (res.status == HttpStatusCode.Created) {
         onSuccess()
       }
