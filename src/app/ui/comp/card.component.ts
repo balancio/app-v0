@@ -26,7 +26,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       background: #333435;
     }
     a.card.active {
-      border: 1px solid #888888;
+      border: 1px solid;
       /* border: 1px solid #d4d4d4; */
     }
   `

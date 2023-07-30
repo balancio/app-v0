@@ -64,7 +64,7 @@ export class AppViewComponent {
     this.getMyWallets()
   }
 
-  selectedWallet: WalletModel | null = this.wallets[1]
+  selectedWallet: WalletModel | null = null
 
   // ==== API - Read ====
 

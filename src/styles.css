@@ -57,8 +57,7 @@ button:active {
   border: 1px solid #888888;
 }
 
-.test-class {
-  flex-grow: 1;
-  flex-direction: column;
-  flex: 1 auto content;
+button:focus {
+  outline: none;
+  border: 1px solid;
 }
