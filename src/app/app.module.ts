@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardComponent } from './ui/comp/card.component';
 import { AddTransactionViewComponent } from './ui/view/add-transaction-view.component';
 import { AddWalletViewComponent } from './ui/view/add-wallet-view.component';
+import { RegisterViewComponent } from './ui/view/register-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddWalletViewComponent } from './ui/view/add-wallet-view.component';
     LoginViewComponent,
     CardComponent,
     AddTransactionViewComponent,
-    AddWalletViewComponent
+    AddWalletViewComponent,
+    RegisterViewComponent
   ],
   imports: [
     BrowserModule,

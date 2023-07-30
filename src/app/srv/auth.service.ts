@@ -15,6 +15,24 @@ export class AuthService {
     private router: Router
   ) { }
 
+  register(user: string, pass1: string, pass2: string, onSuccess: Function = () => {}, onError: Function = () => {}) {
+    const data = {
+      username: user,
+      password: pass1,
+      password_confirm: pass2
+    }
+    this.userApi.register(data).subscribe((res) => {
+      // Success
+      if(res.status == HttpStatusCode.Created) {
+        onSuccess()
+      }
+      // Error
+      else {
+        onError()
+      }
+    })
+  }
+
   login(user: string, pass: string, onSuccess: Function = () => {}, onError: Function = () => {}) {
     this.userApi.login(user, pass).subscribe((res) => {
       const token = res.headers.get('Authorization')?.replace('Bearer ', '')

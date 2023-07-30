@@ -33,6 +33,12 @@ export class UserApiService {
     )
   }
 
+  register(data: any) {
+    return this.http.post(`${this.url()}`, data,
+      { observe: 'response' }
+    )
+  }
+
   getUserWallets(user: string) {
     return this.http.get(`${this.url()}/${user}/wallets`, {
       observe: 'response',
