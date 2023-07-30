@@ -64,6 +64,9 @@ export class AppViewComponent {
     private authSrv: AuthService,
     private router: Router
   ) {
+    if (authSrv.loggedIn() == false) {
+      router.navigate(['login'])
+    }
     this.getMyWallets()
   }
 

@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/srv/auth.service';
       <button (click)="register()">Register</button>
       <div class="foot">
         <div>Allready have account?</div>
-        <a href="/login">Login</a>
+        <a [routerLink]="'/login'">Login</a>
       </div>
     </main>
   `,
@@ -58,7 +58,11 @@ export class RegisterViewComponent {
   constructor(
     private authSrv: AuthService,
     private router: Router
-  ) { }
+  ) {
+    if (authSrv.loggedIn()) {
+      router.navigate([''])
+    }
+  }
 
   register() {
     this.authSrv.register(this.username, this.pass1, this.pass2, this.onRegister.bind(this))

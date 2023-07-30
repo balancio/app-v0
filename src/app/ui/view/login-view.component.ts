@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/srv/auth.service';
       <button (click)="login()">Login</button>
       <div class="foot">
         <div>Don't have account?</div>
-        <a href="/register"> Register</a>
+        <a [routerLink]="'/register'"> Register</a>
       </div>
     </main>
   `,
@@ -56,7 +56,11 @@ export class LoginViewComponent {
   constructor(
     private authSrv: AuthService,
     private router: Router
-  ) { }
+  ) {
+    if (authSrv.loggedIn()) {
+      router.navigate([''])
+    }
+  }
 
   login() {
     this.authSrv.login(this.username, this.password, this.onLogin.bind(this))
