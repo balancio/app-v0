@@ -4,8 +4,8 @@ import { UserApiService } from '../api/user-api.service';
 import { AuthService } from './auth.service';
 import { HttpStatusCode } from '@angular/common/http';
 import { fromBody as walletFromBody } from '../data/model/wallet-model';
-import { fromBody as tranFromBody } from '../data/model/transaction-model';
-import { CbOnError, CbTransactions, CbWallets } from '../data/type/callbacks';
+import { TransactionModel, fromBody as tranFromBody } from '../data/model/transaction-model';
+import { CbEmpty, CbTransactions, CbWallets } from '../data/type/callbacks';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class WalletService {
    * @param onSuccess Called if wallets are got successfuly
    * @param onError Called otherwise
    */
-  getMyWallets(onSuccess: CbWallets = () => {}, onError: CbOnError = () => {}) {
+  getMyWallets(onSuccess: CbWallets = () => {}, onError: CbEmpty = () => {}) {
     const user = this.authSrv.getTokenPayload().username
     this.userApi.getUserWallets(user).subscribe((res) => {
       if (res.status == HttpStatusCode.Ok) {
@@ -35,11 +35,25 @@ export class WalletService {
     })
   }
 
-  getWalletTrans(wid: string, onSuccess: CbTransactions, onError: CbOnError = () => {}) {
+  getWalletTrans(wid: string, onSuccess: CbTransactions, onError: CbEmpty = () => {}) {
     this.walletApi.getWalletTrans(wid).subscribe((res) => {
       if (res.status == HttpStatusCode.Ok) {
         const data = (res.body as Array<any>).map(tranFromBody)
         onSuccess(data)
+      }
+    })
+  }
+
+  createWalletTran(wid: string, tran: TransactionModel, onSuccess: CbEmpty, onError: CbEmpty = () => {}) {
+    const newTran = {
+      title: tran.title,
+      date: Number(tran.date),
+      amount: tran.amount
+    }
+    console.log(newTran)
+    this.walletApi.createWalletTran(wid, newTran).subscribe((res) => {
+      if (res.status == HttpStatusCode.Created) {
+        onSuccess()
       }
     })
   }

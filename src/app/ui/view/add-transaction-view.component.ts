@@ -1,31 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { TransactionModel } from 'src/app/data/model/transaction-model';
 
 @Component({
   selector: 'app-add-transaction-view',
   template: `
     <app-section>
+      <h1 header>Create new Transaction</h1>
       <main>
 
         <div class="gr-1">
           <label>
             <div>Title</div>
-            <input type="text">
+            <input type="text" [(ngModel)]="title">
           </label>
         </div>
 
         <div class="gr-2">
           <label>
             <div>Date</div>
-            <input type="date">
+            <input type="date" [(ngModel)]="date">
           </label>
 
           <label>
             <div>Amount</div>
-            <input type="number">
+            <input type="number" [(ngModel)]="amount">
           </label>
         </div>
 
-        <button>Create</button>
+        <button (click)="add()">Create</button>
 
       </main>
     </app-section>
@@ -83,6 +85,32 @@ import { Component } from '@angular/core';
 })
 export class AddTransactionViewComponent {
 
+  @Output('add') addEve = new EventEmitter()
 
+  title: string = ''
+  date: string | null = null
+  amount: number = 0
+
+  add() {
+    // console.log(this.title, this.date, this.amount)
+
+    if (this.title == '')
+      return
+
+    if (this.date == null)
+      return
+
+    if (this.amount == 0)
+      return
+
+    const tran: TransactionModel = {
+      id: '',
+      title: this.title,
+      date: new Date(this.date),
+      amount: this.amount,
+    }
+
+    this.addEve.emit(tran)
+  }
 
 }
