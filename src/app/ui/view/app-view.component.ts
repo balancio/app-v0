@@ -14,9 +14,11 @@ import { WalletService } from 'src/app/srv/wallet.service';
           (walletChanged)="getWalletData($event)"
           (newWallet)="openNewWalletPanel()"
           (logout)="logout()"
+          (settings)="openSettings()"
           [wallets]="wallets"
           [selected]="selectedWallet"
           [selNew]="infoPanel == 'AddWallet'"
+          [selSettings]="infoPanel == 'Settings'"
         ></app-wallets-sidebar-view>
       </section>
       <section>
@@ -27,7 +29,8 @@ import { WalletService } from 'src/app/srv/wallet.service';
         ></app-wallet-view>
       </section>
       <section>
-        <app-section *ngIf="infoPanel == null" [vh100]="true"></app-section>
+        <app-section *ngIf="infoPanel == null" [vh100]="true" [outline]="false"></app-section>
+        <app-settings-view *ngIf="infoPanel == 'Settings'"></app-settings-view>
         <app-add-transaction-view *ngIf="infoPanel == 'AddTran'" (add)="addNewTransaction($event)"></app-add-transaction-view>
         <app-add-wallet-view *ngIf="infoPanel == 'AddWallet'" (add)="addNewWallet($event)"></app-add-wallet-view>
       </section>
@@ -54,7 +57,7 @@ export class AppViewComponent {
 
   wallets: WalletModel[] = []
 
-  infoPanel: null | 'AddTran' | 'AddWallet' | 'TranInfo' = null
+  infoPanel: null | 'Settings' | 'AddTran' | 'AddWallet' | 'TranInfo' = 'Settings'
 
   constructor(
     private walletSrv: WalletService,
@@ -110,11 +113,15 @@ export class AppViewComponent {
   // ==== UI Change ====
 
   openNewTranPanel() {
-    this.infoPanel = 'AddTran'
+    this.infoPanel = this.infoPanel != 'AddTran'? 'AddTran' : null
   }
 
   openNewWalletPanel() {
-    this.infoPanel = 'AddWallet'
+    this.infoPanel = this.infoPanel != 'AddWallet'? 'AddWallet' : null
+  }
+
+  openSettings() {
+    this.infoPanel = this.infoPanel != 'Settings'? 'Settings' : null
   }
 
   // ==== Actions ====

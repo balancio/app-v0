@@ -14,6 +14,7 @@ import { CardComponent } from './ui/comp/card.component';
 import { AddTransactionViewComponent } from './ui/view/add-transaction-view.component';
 import { AddWalletViewComponent } from './ui/view/add-wallet-view.component';
 import { RegisterViewComponent } from './ui/view/register-view.component';
+import { SettingsViewComponent } from './ui/view/settings-view.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RegisterViewComponent } from './ui/view/register-view.component';
     CardComponent,
     AddTransactionViewComponent,
     AddWalletViewComponent,
-    RegisterViewComponent
+    RegisterViewComponent,
+    SettingsViewComponent
   ],
   imports: [
     BrowserModule,
