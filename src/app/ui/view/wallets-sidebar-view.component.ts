@@ -4,7 +4,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
 @Component({
   selector: 'app-wallets-sidebar-view',
   template: `
-    <app-section [title]="'Wallets'">
+    <app-section [title]="'Wallets'" [vh100]="true">
       <nav>
         <div *ngFor="let w of wallets">
           <app-card [active]="selected == w" (interact)="walletChanged.emit(w)">

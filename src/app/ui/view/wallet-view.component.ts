@@ -5,7 +5,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
 @Component({
   selector: 'app-wallet-view',
   template: `
-    <app-section [title]="wallet?.name ?? null" [outline]="false">
+    <app-section [title]="wallet?.name ?? null" [outline]="false" [vh100]="true">
       <span *ngIf="wallet" class="info" header>
         <span [ngClass]="{ 'c-bad': wallet.total < 0, 'c-good': wallet.total > 0 }">
           {{wallet.total}}

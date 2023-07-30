@@ -32,4 +32,6 @@ input:focus {
 
 .test-class {
   flex-grow: 1;
+  flex-direction: column;
+  flex: 1 auto content;
 }

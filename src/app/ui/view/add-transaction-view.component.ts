@@ -4,7 +4,7 @@ import { TransactionModel } from 'src/app/data/model/transaction-model';
 @Component({
   selector: 'app-add-transaction-view',
   template: `
-    <app-section>
+    <app-section [vh100]="true">
       <h1 header>Create new Transaction</h1>
       <main>
 

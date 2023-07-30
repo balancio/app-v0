@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-section',
   template: `
-    <section [ngClass]="{ 'outline': outline }">
+    <section [ngClass]="{ 'outline': outline, 'vh100': vh100 }">
       <header>
         <h1 *ngIf="title">{{title}}</h1>
         <ng-content select="[header]"></ng-content>
@@ -22,10 +22,16 @@ import { Component, Input } from '@angular/core';
         outline: 1px solid black;
       }
       section {
-        height: 100%;
         background: #252627;
         /* background: #333435; */
         overflow: hide;
+
+        /* display: flex;
+        flex-direction: column;
+        flex: 1 auto 1; */
+      }
+      section.vh100 {
+        height: 100vh;
       }
       /* Header */
       header {
@@ -45,8 +51,8 @@ import { Component, Input } from '@angular/core';
       }
       /* Main */
       main {
-        height: 85%; /* TODO: This is hard-coded! */
-        overflow: auto;
+        height: calc(100% - 50px);
+        overflow: scroll;
       }
     `
   ]
@@ -54,5 +60,6 @@ import { Component, Input } from '@angular/core';
 export class SectionComponent {
   @Input() title: string | null = null
   @Input() outline: boolean = true
+  @Input() vh100: boolean = false
 
 }
