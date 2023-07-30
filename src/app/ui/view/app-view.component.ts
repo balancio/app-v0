@@ -17,12 +17,14 @@ import { WalletService } from 'src/app/srv/wallet.service';
           [wallets]="wallets"
           [selected]="selectedWallet"
           [selNew]="infoPanel == 'AddWallet'"
-        >
-
-        </app-wallets-sidebar-view>
+        ></app-wallets-sidebar-view>
       </section>
       <section>
-        <app-wallet-view [wallet]="selectedWallet" (newTran)="openNewTranPanel()"></app-wallet-view>
+        <app-wallet-view
+          (newTran)="openNewTranPanel()"
+          [wallet]="selectedWallet"
+          [selNew]="infoPanel == 'AddTran'"
+        ></app-wallet-view>
       </section>
       <section>
         <app-section *ngIf="infoPanel == null" [vh100]="true"></app-section>

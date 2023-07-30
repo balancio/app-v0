@@ -12,7 +12,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
         </span> {{wallet.currency}}
       </span>
       <span *ngIf="wallet" class="info" header>
-        <app-card (interact)="newTranClick()" [active]="selNewTran">New Transaction</app-card>
+        <app-card (interact)="newTranClick()" [active]="selNew">New Transaction</app-card>
       </span>
       <nav *ngIf="wallet && wallet.transactions">
         <div *ngFor="let t of wallet.transactions">
@@ -54,16 +54,15 @@ export class WalletViewComponent {
 
   @Input() wallet: WalletModel | null = null
 
-  selTran: null | TransactionModel = null
-  selNewTran = false
+  @Input() selTran: null | TransactionModel = null
+
+  @Input() selNew = false // "Active" state
 
   onTranClick(tran: TransactionModel) {
-    this.selNewTran = false
-    this.selTran = tran
+    // this.selTran = tran // TODO: Uncomment when TranInfo is implemented
   }
 
   newTranClick() {
-    this.selNewTran = true
     this.selTran = null
     this.openNewTranPanel.emit()
   }
