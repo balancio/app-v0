@@ -6,7 +6,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
   template: `
     <app-section [title]="'Wallets'" [vh100]="true" [showFooter]="true">
       <div header>
-        <app-card (interact)="newWalletClick()" [active]="selNewWallet">
+        <app-card (interact)="newWalletClick()" [active]="selNew">
           New
         </app-card>
       </div>
@@ -47,16 +47,15 @@ export class WalletsSidebarViewComponent {
 
   @Input() wallets: WalletModel[] = []
   @Input() selected: WalletModel | null = null
+  @Input() selNew!: boolean
 
   @Output() walletChanged = new EventEmitter<WalletModel>()
   @Output('newWallet') openNewWalletPanel = new EventEmitter()
 
   @Output() logout = new EventEmitter()
 
-  selNewWallet = false
 
   newWalletClick() {
-    this.selNewWallet = true
     this.openNewWalletPanel.emit()
   }
 

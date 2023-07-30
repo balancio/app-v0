@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 import { HttpStatusCode } from '@angular/common/http';
 import { WalletModel, fromBody as walletFromBody } from '../data/model/wallet-model';
 import { TransactionModel, fromBody as tranFromBody } from '../data/model/transaction-model';
-import { CbEmpty, CbTransactions, CbWallets } from '../data/type/callbacks';
+import { CbEmpty, CbTransactions, CbWallets, CbWallet } from '../data/type/callbacks';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,15 @@ export class WalletService {
     this.walletApi.getWalletTrans(wid).subscribe((res) => {
       if (res.status == HttpStatusCode.Ok) {
         const data = (res.body as Array<any>).map(tranFromBody)
+        onSuccess(data)
+      }
+    })
+  }
+
+  getWallet(wid: string, onSuccess: CbWallet, onError: CbEmpty = () => {}) {
+    this.walletApi.getWallet(wid).subscribe((res) => {
+      if (res.status == HttpStatusCode.Ok) {
+        const data = walletFromBody(res.body)
         onSuccess(data)
       }
     })

@@ -16,6 +16,7 @@ import { WalletService } from 'src/app/srv/wallet.service';
           (logout)="logout()"
           [wallets]="wallets"
           [selected]="selectedWallet"
+          [selNew]="infoPanel == 'AddWallet'"
         >
 
         </app-wallets-sidebar-view>
@@ -24,7 +25,7 @@ import { WalletService } from 'src/app/srv/wallet.service';
         <app-wallet-view [wallet]="selectedWallet" (newTran)="openNewTranPanel()"></app-wallet-view>
       </section>
       <section>
-        <app-section *ngIf="infoPanel == null" [title]="''" [vh100]="true"></app-section>
+        <app-section *ngIf="infoPanel == null" [vh100]="true"></app-section>
         <app-add-transaction-view *ngIf="infoPanel == 'AddTran'" (add)="addNewTransaction($event)"></app-add-transaction-view>
         <app-add-wallet-view *ngIf="infoPanel == 'AddWallet'" (add)="addNewWallet($event)"></app-add-wallet-view>
       </section>
@@ -51,7 +52,7 @@ export class AppViewComponent {
 
   wallets: WalletModel[] = []
 
-  infoPanel: null | 'AddTran' | 'AddWallet' = null
+  infoPanel: null | 'AddTran' | 'AddWallet' | 'TranInfo' = null
 
   constructor(
     private walletSrv: WalletService,
@@ -65,11 +66,26 @@ export class AppViewComponent {
 
   // ==== API - Read ====
 
-  getWalletData(val: WalletModel) {
-    this.walletSrv.getWalletTrans(val.id,
-      (trans) => this.cbSuccessGetTrans(trans, val),
-      () => this.selectedWallet = null
-    )
+  getWalletData(wallet: WalletModel, tranOnly: boolean = true) {
+    if (tranOnly == false) {
+      this.walletSrv.getWallet(wallet.id,
+        (wal) => {
+          this.walletSrv.getWalletTrans(wal.id,
+            (trans) => this.cbSuccessGetTrans(trans, wal),
+            () => this.selectedWallet = null
+          )
+        },
+        () => this.selectedWallet = null
+      )
+    }
+    else {
+      this.walletSrv.getWalletTrans(wallet.id,
+        (trans) => this.cbSuccessGetTrans(trans, wallet),
+        () => this.selectedWallet = null
+      )
+    }
+
+
   }
 
   getMyWallets() {
@@ -109,28 +125,29 @@ export class AppViewComponent {
   // ==== Callbacks ====
 
   cbSuccessGetMyWallets(wallets: WalletModel[]) {
-    console.log(wallets)
+    // console.log(wallets)
     this.wallets = wallets
   }
 
   cbSuccessGetTrans(trans: TransactionModel[], selected: WalletModel) {
-    console.log(trans)
     if (this.selectedWallet)
       this.selectedWallet.transactions = undefined
+
     selected.transactions = trans
     this.selectedWallet = selected
+    // console.log(this.selectedWallet)
   }
 
   cbSuccessNewTran() {
-    this.infoPanel = null
-    this.infoPanel = 'AddTran'
+    // this.infoPanel = null
+    // this.infoPanel = 'AddTran'
+    console.log(this.selectedWallet)
     if (this.selectedWallet)
-      this.getWalletData(this.selectedWallet)
+      this.getWalletData(this.selectedWallet, false)
   }
 
   cbSuccessNewWallet() {
     this.infoPanel = null
-    this.infoPanel = 'AddTran'
     this.getMyWallets()
   }
 }

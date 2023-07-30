@@ -24,6 +24,13 @@ export class WalletApiService {
     })
   }
 
+  getWallet(wid: string) {
+    return this.http.get(`${this.url()}/${wid}`, {
+      observe: 'response',
+      headers: this.httpHelp.fillHeaders()
+    })
+  }
+
   createWalletTran(wid: string, tran: any) {
     return this.http.post(`${this.url()}/${wid}/transactions`, tran, {
       observe: 'response',
