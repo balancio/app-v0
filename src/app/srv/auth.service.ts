@@ -30,6 +30,10 @@ export class AuthService {
     })
   }
 
+  logout() {
+    tokenUtil.deleteToken()
+  }
+
   loggedIn() {
     return tokenUtil.loadToken() ? true : false
   }

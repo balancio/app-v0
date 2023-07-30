@@ -4,10 +4,15 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
 @Component({
   selector: 'app-wallets-sidebar-view',
   template: `
-    <app-section [title]="'Wallets'" [vh100]="true">
+    <app-section [title]="'Wallets'" [vh100]="true" [showFooter]="true">
       <div header>
         <app-card (interact)="newWalletClick()" [active]="selNewWallet">
           New
+        </app-card>
+      </div>
+      <div footer>
+        <app-card (interact)="onLogout()">
+          Logout
         </app-card>
       </div>
       <nav>
@@ -46,10 +51,16 @@ export class WalletsSidebarViewComponent {
   @Output() walletChanged = new EventEmitter<WalletModel>()
   @Output('newWallet') openNewWalletPanel = new EventEmitter()
 
+  @Output() logout = new EventEmitter()
+
   selNewWallet = false
 
   newWalletClick() {
     this.selNewWallet = true
     this.openNewWalletPanel.emit()
+  }
+
+  onLogout() {
+    this.logout.emit()
   }
 }

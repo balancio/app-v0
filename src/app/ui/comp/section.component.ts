@@ -8,10 +8,10 @@ import { Component, Input } from '@angular/core';
         <h1 *ngIf="title">{{title}}</h1>
         <ng-content select="[header]"></ng-content>
       </header>
-      <main>
+      <main [ngClass]="{ 'wfooter': showFooter }">
         <ng-content></ng-content>
       </main>
-      <footer>
+      <footer *ngIf="showFooter">
         <ng-content select="[footer]"></ng-content>
       </footer>
     </section>
@@ -54,6 +54,18 @@ import { Component, Input } from '@angular/core';
         height: calc(100% - 50px);
         overflow: scroll;
       }
+      main.wfooter {
+        height: calc(100% - 50px - 50px);
+      }
+      /* Footer */
+      footer {
+        display: flex;
+        align-items: center;
+
+        box-sizing: border-box;
+        height: 50px;
+        padding: 0 10px;
+      }
     `
   ]
 })
@@ -61,5 +73,7 @@ export class SectionComponent {
   @Input() title: string | null = null
   @Input() outline: boolean = true
   @Input() vh100: boolean = false
+  @Input() showFooter: boolean = false
+
 
 }

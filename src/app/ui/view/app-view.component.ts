@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { TransactionModel } from 'src/app/data/model/transaction-model';
 import { WalletModel } from 'src/app/data/model/wallet-model';
+import { AuthService } from 'src/app/srv/auth.service';
 import { WalletService } from 'src/app/srv/wallet.service';
 
 @Component({
@@ -11,6 +13,7 @@ import { WalletService } from 'src/app/srv/wallet.service';
         <app-wallets-sidebar-view
           (walletChanged)="getWalletData($event)"
           (newWallet)="openNewWalletPanel()"
+          (logout)="logout()"
           [wallets]="wallets"
           [selected]="selectedWallet"
         >
@@ -36,7 +39,6 @@ import { WalletService } from 'src/app/srv/wallet.service';
         height: 100vh;
       }
       main > section {
-        /* border-right: 1px solid black; */
         box-sizing: border-box;
       }
       main > section:nth-child(1) { min-width: 150px; z-index: 1; }
@@ -52,7 +54,9 @@ export class AppViewComponent {
   infoPanel: null | 'AddTran' | 'AddWallet' = null
 
   constructor(
-    private walletSrv: WalletService
+    private walletSrv: WalletService,
+    private authSrv: AuthService,
+    private router: Router
   ) {
     this.getMyWallets()
   }
@@ -93,6 +97,13 @@ export class AppViewComponent {
 
   openNewWalletPanel() {
     this.infoPanel = 'AddWallet'
+  }
+
+  // ==== Actions ====
+
+  logout() {
+    this.authSrv.logout()
+    this.router.navigate(['login'])
   }
 
   // ==== Callbacks ====

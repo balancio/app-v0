@@ -5,11 +5,29 @@ import { AuthService } from 'src/app/srv/auth.service';
 @Component({
   selector: 'app-login-view',
   template: `
-    <label>Username <input type="text" [(ngModel)]="username"></label> <br>
-    <label>Password <input type="password" [(ngModel)]="password"></label> <br>
-    <button (click)="login()">Login</button>
+    <main>
+      <h1>Balancio</h1>
+      <hr>
+      <h2>Login</h2>
+      <label>Username <br> <input type="text" [(ngModel)]="username"></label> <br>
+      <label>Password <br> <input type="password" [(ngModel)]="password"></label> <br>
+      <button (click)="login()">Login</button>
+    </main>
   `,
   styles: [
+  `
+    main {
+      margin: auto;
+      width: min-content;
+      margin-top: calc(10vh)
+    }
+
+    button {
+      display: block;
+      margin: auto;
+      margin-top: 20px;
+    }
+  `
   ]
 })
 export class LoginViewComponent {
