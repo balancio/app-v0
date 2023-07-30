@@ -12,6 +12,10 @@ import { AuthService } from 'src/app/srv/auth.service';
       <label>Username <br> <input type="text" [(ngModel)]="username"></label> <br>
       <label>Password <br> <input type="password" [(ngModel)]="password"></label> <br>
       <button (click)="login()">Login</button>
+      <div class="foot">
+        <div>Don't have account?</div>
+        <a href="/register"> Register</a>
+      </div>
     </main>
   `,
   styles: [
@@ -26,6 +30,20 @@ import { AuthService } from 'src/app/srv/auth.service';
       display: block;
       margin: auto;
       margin-top: 20px;
+    }
+
+    .foot {
+      margin-top: 30px;
+      font-size: 0.9em;
+      text-align: center;
+    }
+
+    .foot a {
+      color: unset;
+    }
+
+    .foot a:hover {
+      color: violet;
     }
   `
   ]
