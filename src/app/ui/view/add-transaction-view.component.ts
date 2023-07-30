@@ -64,21 +64,6 @@ import { TransactionModel } from 'src/app/data/model/transaction-model';
       display: block;
       margin: auto;
       margin-top: 20px;
-      padding: 4px 20px;
-
-
-      border-radius: 4px;
-
-      color: unset;
-      background: #333435;
-      border: 1px solid #181819;
-      text-decoration: none;
-    }
-    button:hover {
-      background: #1f2021;
-    }
-    button:active {
-      border: 1px solid #888888;
     }
   `
   ]

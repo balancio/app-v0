@@ -15,6 +15,8 @@ body {
   color: #b92c44;
 }
 
+/* Input */
+
 input {
   background: #333435;
   border: 1px solid #181819;
@@ -28,6 +30,27 @@ input {
 input:focus {
   outline: none;
   border: 1px solid;
+}
+
+/* Button */
+
+button {
+  display: inline-block;
+  padding: 4px 20px;
+
+  border-radius: 4px;
+
+  color: unset;
+  background: #333435;
+  border: 1px solid #181819;
+}
+
+button:hover {
+  background: #1f2021;
+}
+
+button:active {
+  border: 1px solid #888888;
 }
 
 .test-class {
