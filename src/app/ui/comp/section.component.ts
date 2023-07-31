@@ -52,7 +52,7 @@ import { Component, Input } from '@angular/core';
       /* Main */
       main {
         height: calc(100% - 50px);
-        overflow: scroll;
+        overflow: auto;
       }
       main.wfooter {
         height: calc(100% - 50px - 50px);
