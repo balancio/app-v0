@@ -15,6 +15,7 @@ import { AddTransactionViewComponent } from './ui/view/add-transaction-view.comp
 import { AddWalletViewComponent } from './ui/view/add-wallet-view.component';
 import { RegisterViewComponent } from './ui/view/register-view.component';
 import { SettingsViewComponent } from './ui/view/settings-view.component';
+import { TransactionInfoViewComponent } from './ui/view/transaction-info-view.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SettingsViewComponent } from './ui/view/settings-view.component';
     AddTransactionViewComponent,
     AddWalletViewComponent,
     RegisterViewComponent,
-    SettingsViewComponent
+    SettingsViewComponent,
+    TransactionInfoViewComponent
   ],
   imports: [
     BrowserModule,

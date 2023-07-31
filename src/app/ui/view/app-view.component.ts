@@ -11,7 +11,7 @@ import { WalletService } from 'src/app/srv/wallet.service';
     <main>
       <section>
         <app-wallets-sidebar-view
-          (walletChanged)="getWalletData($event)"
+          (walletChanged)="onWalletChoosed($event)"
           (newWallet)="openNewWalletPanel()"
           (logout)="logout()"
           (settings)="openSettings()"
@@ -24,15 +24,34 @@ import { WalletService } from 'src/app/srv/wallet.service';
       <section>
         <app-wallet-view
           (newTran)="openNewTranPanel()"
+          (select)="openTranInfo($event)"
           [wallet]="selectedWallet"
           [selNew]="infoPanel == 'AddTran'"
         ></app-wallet-view>
       </section>
+
       <section>
-        <app-section *ngIf="infoPanel == null" [vh100]="true" [outline]="false"></app-section>
-        <app-settings-view *ngIf="infoPanel == 'Settings'"></app-settings-view>
-        <app-add-transaction-view *ngIf="infoPanel == 'AddTran'" (add)="addNewTransaction($event)"></app-add-transaction-view>
-        <app-add-wallet-view *ngIf="infoPanel == 'AddWallet'" (add)="addNewWallet($event)"></app-add-wallet-view>
+
+        <app-section *ngIf="infoPanel == null"
+          [vh100]="true" [outline]="false">
+        </app-section>
+
+        <app-settings-view *ngIf="infoPanel == 'Settings'">
+        </app-settings-view>
+
+        <app-add-transaction-view *ngIf="infoPanel == 'AddTran'"
+          (add)="addNewTransaction($event)">
+        </app-add-transaction-view>
+
+        <app-add-wallet-view *ngIf="infoPanel == 'AddWallet'"
+          (add)="addNewWallet($event)">
+        </app-add-wallet-view>
+
+        <app-transaction-info-view *ngIf="infoPanel == 'TranInfo' && selectedTran && selectedWallet"
+          [transaction]="selectedTran"
+          [currency]="selectedWallet.currency"
+          (delete)="deleteTransaction($event)">
+        </app-transaction-info-view>
       </section>
     </main>
   `,
@@ -71,6 +90,19 @@ export class AppViewComponent {
   }
 
   selectedWallet: WalletModel | null = null
+  selectedTran: TransactionModel | null = null
+
+  // ==== Helpers ====
+
+  onWalletChoosed(wallet: WalletModel) {
+
+    if (this.selectedWallet == null || (this.selectedWallet != null && this.selectedWallet.id != wallet.id)) {
+      this.selectedWallet = null
+      this.infoPanel = this.infoPanel == 'TranInfo' ? null : this.infoPanel
+    }
+
+    this.getWalletData(wallet)
+  }
 
   // ==== API - Read ====
 
@@ -113,18 +145,30 @@ export class AppViewComponent {
     this.walletSrv.createWallet(wallet, this.cbSuccessNewWallet.bind(this))
   }
 
+  deleteTransaction(tran: TransactionModel) {
+    console.log('DELETE Transaction\n', tran)
+  }
+
   // ==== UI Change ====
 
   openNewTranPanel() {
     this.infoPanel = this.infoPanel != 'AddTran'? 'AddTran' : null
+    this.selectedTran = null
   }
 
   openNewWalletPanel() {
     this.infoPanel = this.infoPanel != 'AddWallet'? 'AddWallet' : null
+    this.selectedTran = null
   }
 
   openSettings() {
     this.infoPanel = this.infoPanel != 'Settings'? 'Settings' : null
+    this.selectedTran = null
+  }
+
+  openTranInfo(tran: TransactionModel) {
+    this.infoPanel = 'TranInfo'
+    this.selectedTran = tran
   }
 
   // ==== Actions ====

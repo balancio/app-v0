@@ -51,6 +51,7 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
 export class WalletViewComponent {
 
   @Output('newTran') openNewTranPanel = new EventEmitter()
+  @Output() select = new EventEmitter()
 
   @Input() wallet: WalletModel | null = null
 
@@ -59,7 +60,8 @@ export class WalletViewComponent {
   @Input() selNew = false // "Active" state
 
   onTranClick(tran: TransactionModel) {
-    // this.selTran = tran // TODO: Uncomment when TranInfo is implemented
+    this.selTran = tran
+    this.select.emit(tran)
   }
 
   newTranClick() {
