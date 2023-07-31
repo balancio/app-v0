@@ -25,8 +25,11 @@ import { WalletService } from 'src/app/srv/wallet.service';
         <app-wallet-view
           (newTran)="openNewTranPanel()"
           (select)="openTranInfo($event)"
+          (info)="openWalletInfo()"
           [wallet]="selectedWallet"
+          [selTran]="selectedTran"
           [selNew]="infoPanel == 'AddTran'"
+          [selInfo]="infoPanel == 'WalletInfo'"
         ></app-wallet-view>
       </section>
 
@@ -52,6 +55,11 @@ import { WalletService } from 'src/app/srv/wallet.service';
           [currency]="selectedWallet.currency"
           (delete)="deleteTransaction($event)">
         </app-transaction-info-view>
+
+        <app-wallet-info-view *ngIf="infoPanel == 'WalletInfo' && selectedWallet"
+          [wallet]="selectedWallet"
+          (delete)="deleteWallet($event)">
+        </app-wallet-info-view>
       </section>
     </main>
   `,
@@ -76,7 +84,7 @@ export class AppViewComponent {
 
   wallets: WalletModel[] = []
 
-  infoPanel: null | 'Settings' | 'AddTran' | 'AddWallet' | 'TranInfo' = 'Settings'
+  infoPanel: null | 'Settings' | 'AddTran' | 'AddWallet' | 'TranInfo' | 'WalletInfo' = 'Settings'
 
   constructor(
     private walletSrv: WalletService,
@@ -96,10 +104,9 @@ export class AppViewComponent {
 
   onWalletChoosed(wallet: WalletModel) {
 
-    if (this.selectedWallet == null || (this.selectedWallet != null && this.selectedWallet.id != wallet.id)) {
-      this.selectedWallet = null
-      this.infoPanel = this.infoPanel == 'TranInfo' ? null : this.infoPanel
-    }
+    this.infoPanel = 'WalletInfo'
+    this.selectedTran = null
+
 
     this.getWalletData(wallet)
   }
@@ -149,6 +156,10 @@ export class AppViewComponent {
     console.log('DELETE Transaction\n', tran)
   }
 
+  deleteWallet(wallet: WalletModel) {
+    console.log('DELETE Wallet\n', wallet)
+  }
+
   // ==== UI Change ====
 
   openNewTranPanel() {
@@ -169,6 +180,11 @@ export class AppViewComponent {
   openTranInfo(tran: TransactionModel) {
     this.infoPanel = 'TranInfo'
     this.selectedTran = tran
+  }
+
+  openWalletInfo() {
+    this.infoPanel = this.infoPanel != 'WalletInfo'? 'WalletInfo' : null
+    this.selectedTran = null
   }
 
   // ==== Actions ====

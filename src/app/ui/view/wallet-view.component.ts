@@ -14,6 +14,9 @@ import { WalletModel } from 'src/app/data/model/wallet-model';
       <span *ngIf="wallet" class="info" header>
         <app-card (interact)="newTranClick()" [active]="selNew">New Transaction</app-card>
       </span>
+      <span *ngIf="wallet" class="info" header>
+        <app-card (interact)="onInfoClick()" [active]="selInfo">Info</app-card>
+      </span>
       <nav *ngIf="wallet && wallet.transactions">
         <div *ngFor="let t of wallet.transactions">
           <app-card (interact)="onTranClick(t)" [active]="selTran != null && t.id == selTran.id">
@@ -52,12 +55,15 @@ export class WalletViewComponent {
 
   @Output('newTran') openNewTranPanel = new EventEmitter()
   @Output() select = new EventEmitter()
+  @Output() info= new EventEmitter()
 
   @Input() wallet: WalletModel | null = null
 
   @Input() selTran: null | TransactionModel = null
 
-  @Input() selNew = false // "Active" state
+  // "Active" states
+  @Input() selNew = false
+  @Input() selInfo = false
 
   onTranClick(tran: TransactionModel) {
     this.selTran = tran
@@ -67,5 +73,10 @@ export class WalletViewComponent {
   newTranClick() {
     this.selTran = null
     this.openNewTranPanel.emit()
+  }
+
+  onInfoClick() {
+    this.selTran = null
+    this.info.emit()
   }
 }

@@ -16,6 +16,7 @@ import { AddWalletViewComponent } from './ui/view/add-wallet-view.component';
 import { RegisterViewComponent } from './ui/view/register-view.component';
 import { SettingsViewComponent } from './ui/view/settings-view.component';
 import { TransactionInfoViewComponent } from './ui/view/transaction-info-view.component';
+import { WalletInfoViewComponent } from './ui/view/wallet-info-view.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TransactionInfoViewComponent } from './ui/view/transaction-info-view.co
     AddWalletViewComponent,
     RegisterViewComponent,
     SettingsViewComponent,
-    TransactionInfoViewComponent
+    TransactionInfoViewComponent,
+    WalletInfoViewComponent
   ],
   imports: [
     BrowserModule,
