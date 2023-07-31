@@ -44,4 +44,18 @@ export class WalletApiService {
       headers: this.httpHelp.fillHeaders()
     })
   }
+
+  deleteWallet(wid: any) {
+    return this.http.delete(`${this.url()}/${wid}`, {
+      observe: 'response',
+      headers: this.httpHelp.fillHeaders()
+    })
+  }
+
+  deleteWalletTran(wid: string, tid: string) {
+    return this.http.delete(`${this.url()}/${wid}/transactions/${tid}`, {
+      observe: 'response',
+      headers: this.httpHelp.fillHeaders()
+    })
+  }
 }

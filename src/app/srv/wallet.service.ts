@@ -79,4 +79,20 @@ export class WalletService {
       }
     })
   }
+
+  deleteWallet(wid: string, onSuccess: CbEmpty, onError: CbEmpty = () => {}) {
+    this.walletApi.deleteWallet(wid).subscribe((res) => {
+      if (res.status == HttpStatusCode.Ok) {
+        onSuccess()
+      }
+    })
+  }
+
+  deleteWalletTran(wid: string, tid: string, onSuccess: CbEmpty, onError: CbEmpty = () => {}) {
+    this.walletApi.deleteWalletTran(wid, tid).subscribe((res) => {
+      if (res.status == HttpStatusCode.Ok) {
+        onSuccess()
+      }
+    })
+  }
 }

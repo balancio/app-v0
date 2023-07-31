@@ -153,11 +153,12 @@ export class AppViewComponent {
   }
 
   deleteTransaction(tran: TransactionModel) {
-    console.log('DELETE Transaction\n', tran)
+    if (this.selectedWallet)
+      this.walletSrv.deleteWalletTran(this.selectedWallet.id, tran.id, this.cbSuccessDeleteTran.bind(this))
   }
 
   deleteWallet(wallet: WalletModel) {
-    console.log('DELETE Wallet\n', wallet)
+    this.walletSrv.deleteWallet(wallet.id, this.cbSuccessDeleteWallet.bind(this))
   }
 
   // ==== UI Change ====
@@ -222,4 +223,17 @@ export class AppViewComponent {
     this.infoPanel = null
     this.getMyWallets()
   }
+
+  cbSuccessDeleteTran() {
+    if (this.selectedWallet) {
+      this.getWalletData(this.selectedWallet, false)
+      this.infoPanel = null
+    }
+  }
+
+  cbSuccessDeleteWallet() {
+    this.infoPanel = null
+    this.getMyWallets()
+  }
+
 }
